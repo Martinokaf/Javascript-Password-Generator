@@ -1,6 +1,3 @@
-var characterLenght = 8;
-var choiceArr = [];
-
 // Array of special characters to be included in password
 var specialCharacters = [
   '@',
@@ -91,59 +88,54 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-
-
-
-// document.getElementById('generate').addEventListener('click', function() {
-//   alert(generatePassword());
-// });
-
-var inputs = [""]
 var choice = [];
-let specialChoice 
-let passInfo = "";
-
-let characterAmount = window.prompt("Enter the amount of characters you want for your password. NOTE: Must be between 8-128 characters");
-
-if(isNaN(characterAmount) || characterAmount <  8 || characterAmount > 128) {
-  alert("Character amount has to be 8 - 128. Try again.");
-  
-}
 
 // Function to prompt user for password options
 function getPasswordOptions() {
+  var characterAmount = window.prompt("Enter the amount of characters you want for your password. NOTE: Must be between 8-128 characters"); 
+  while (characterAmount === null || isNaN(characterAmount) || characterAmount < 8 || characterAmount > 128) {
   
+    if(isNaN(characterAmount) || characterAmount <  8 || characterAmount > 128) {
+       alert("Character amount has to be 8 - 128. Try again.");
+    }
+    characterAmount = window.prompt("Enter the amount of characters you want for your password. NOTE: Must be between 8-128 characters"); 
+  }
   if (confirm("Include special character letters?")) {
     choice = choice.concat(specialCharacters);
   }
   if (confirm("Include numeric character letters?")) {
-    choice = choice.concat(numericCharacters);
+      choice = choice.concat(numericCharacters);
   }
   if (confirm("Include lower cased character letters?")) {
-    choice = choice.concat(lowerCasedCharacters);
+      choice = choice.concat(lowerCasedCharacters);
   }
   if (confirm("Include upper cased character letters?")) {
-    choice = choice.concat(upperCasedCharacters);
+    choice = choice.concat(upperCasedCharacters); 
   }
-  return true;
-
+  return { characterAmount, choice };
+   
 }
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 // Function to generate password with user input
 function generatePassword() {
+  var options = getPasswordOptions();
+  var password = "";
+  for (var i = 0; i < options.characterAmount; i++) {
+    var random = getRandom(options.choice);
+    password += random;
+  }
 
+  return password;
 }
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
-
-// Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
 
 // Write password to the #password input
 function writePassword() {
@@ -153,5 +145,5 @@ function writePassword() {
   passwordText.value = password;
 }
 
-
-
+// Add event listener to generate button
+generateBtn.addEventListener('click', writePassword);
