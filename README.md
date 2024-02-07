@@ -9,7 +9,7 @@ The user can choose the lenght of the password when prompted to choose how long 
 
 ## Installation
 
-Simply click on the URL and you will be navigated to the web application on your default browser.[follow the link](https://martinokaf.github.io/Password-Generator/).
+Simply click on the URL and you will be navigated to the web application on your default browser.[follow the link](https://martinokaf.github.io/Javascript-Password-Generator/).
 
 - Visit the project repository or navigate to the website by clicking the link to the website in the readme
 - Explore the website by clicking 'Generate Password' and answer the prompt questions to get your password!
